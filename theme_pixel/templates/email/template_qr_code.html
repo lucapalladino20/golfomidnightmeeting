@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prenotazione evento completata</title>
+</head>
+<body>
+    <h1>Prenotazione evento completata</h1>
+    <p>Gentile cliente,</p>
+    <p>La prenotazione dell'evento per la tua macchina è stata completata con successo.</p>
+    <p>Ecco i dettagli dell'evento:</p>
+    <ul>
+        <li><strong>Evento:</strong> {{ event.name }}</li>
+        <li><strong>Data:</strong> {{ event.date }}</li>
+        <li><strong>Descrizione:</strong> {{ event.description }}</li>
+        <li><strong>Auto Registrata:</strong> {{ car }}</li>
+    </ul>
+    <h4><a href="{{event.map_url_to_share}}">Clicca qui per visualizzare la mappa dell'evento</a></h>
+    <br>
+    <p>Ecco il tuo codice QR per accedere all'evento:</p>
+    <img src="cid:image" alt="Codice QR">
+    <p>Grazie per aver scelto di partecipare all'evento. Se hai domande o necessità, non esitare a contattarci.</p>
+    <p>Cordiali saluti,</p>
+    <p>Il tuo team</p>
+</body>
+</html>

@@ -1,0 +1,91 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load htmltags %}
+
+{% block content %}
+    <main>
+
+        {% include 'includes/pre-loader.html' %}
+
+        <!-- Hero -->
+        <section class="section-header overflow-hidden pt-7 pt-lg-8 pb-9 pb-lg-12 bg-primary text-white">
+            <div class="container">
+              <div class="row">
+                <div class="col-12 text-center">
+                    <h1 class="display-2 mb-3">Eventi</h1>
+                    <p class="lead fw-normal text-muted mb-4 px-lg-10">
+                      Resta connesso per i prossimi eventi!
+                    </p>
+                    <div class="text-center">
+                      <a href="https://www.instagram.com/golfomidnlght_meeting/" target="_blank" class="mx-2">
+                          <i class="fa-brands fab fa-instagram fa-2x"></i>
+                      </a>
+                      <a href="#" target="_blank" class="mx-2">
+                          <i class="fa-brands fab fa-facebook fa-2x"></i>
+                      </a>
+                      <a href="#" target="_blank" class="mx-2">
+                        <i class="fa-brands fa-tiktok fa-2x"></i>
+                      </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <figure class="position-absolute bottom-0 left-0 w-100 golfo-d-md-block mb-n2"><svg class="fill-white"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4">
+                <path d="M3000,0v185.4H0V0c496.4,115.6,996.4,173.4,1500,173.4S2503.6,115.6,3000,0z"></path>
+              </svg></figure>
+          </section>
+
+
+        <div class="section py-0 m-6">
+          {% if events %}
+          <div class="container mb-4 mt-n10 mt-lg-n12 z-2">
+            <div class="row justify-content-center">
+              {% for event in events %}
+              <div class="card border-0 mb-4 p-2 p-md-3 p-lg-5" style="background:{{event.style_background_color}};">
+                {% if event.get_state_display == 'Bozza' and user.is_superuser  %}
+                <p style="color:{{event.style_text_color}};">Evento Bozza visibile solo agli amministratori</p>
+                {% endif %}
+                <div class="row m-2">
+                    <div class="col-12 col-lg-5 mb-5 mb-lg-0 order-lg-2">
+                        <h1 style="color:{{event.style_text_color}};">{{event.name}}</h1>
+                        <p class="mb-4 lead fw-bold" style="color:{{event.style_text_color}};">Data dell'evento: {{event.date|date:"d F Y"}}</p>
+                        <p class="mb-4 lead fw-bold" style="color:{{event.style_text_color}};">{{event.sub_name}}</p>
+                        <p class="mb-4" style="color:{{event.style_text_color}};">{{event.description}}</p>
+                         <div class="nav nav-pills nav-fill flex-column flex-sm-row">
+                          
+
+                            
+                          
+                        
+                        
+                        </div>
+                      </div>
+                      <div class="col-12 col-lg-6 order-lg-1">
+                        <img src="{{event.photo.url}}" alt="Front pages overview">
+                      </div>
+                </div>
+                {% if event.map_url  %}
+                <div class="row m-2">
+                    <div class="col-12">
+                      <iframe class="map rounded" id="gmap_canvas" src="{{event.map_url}}" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+                {% endif %}
+              </div>
+              {% endfor %}
+
+            </div>
+          </div>
+        </div>
+          {% endif %}
+        
+        
+        
+        
+        
+              </div>
+    </main>
+
+
+    {% endblock content %}

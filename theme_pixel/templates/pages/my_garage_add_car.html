@@ -1,0 +1,262 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+    <main>
+
+        {% include 'includes/pre-loader.html' %}
+
+
+        <section class="section-header overflow-hidden pt-7 pt-lg-8 pb-9 pb-lg-12 bg-primary text-white">
+            <div class="container">
+              <div class="row">
+                <div class="col-12 text-center">
+                    <h1 class="display-2 mb-3">Aggiungi auto</h1>
+                    <p class="lead fw-normal text-muted mb-4 px-lg-10">
+                        Inserisci i dati della tua auto
+                    </p>
+                </div>
+              </div>
+            </div>
+            <figure class="position-absolute bottom-0 left-0 w-100 golfo-d-md-block mb-n2"><svg class="fill-white"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4">
+                <path d="M3000,0v185.4H0V0c496.4,115.6,996.4,173.4,1500,173.4S2503.6,115.6,3000,0z"></path>
+              </svg></figure>
+        </section>
+
+        
+
+
+          <div class="section py-0 mt-5">
+            <div class="container mt-n10 mt-lg-n12 z-2">
+              <div class="row justify-content-center">
+                <div class="card border-0 p-2 p-md-3 p-lg-5">
+
+                  <form id="CarForm" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                  <div class="mb-4">
+                    <label>Marca*</label>
+                    {{form.brand}}
+                    <small class="form-text text-gray">inserisci la marca della tua auto</small>
+                  </div>
+
+                  <div class="mb-4">
+                    <label>Modello*</label>
+                    {{form.model}}
+                    <small class="form-text text-gray">inserisci il modello della tua auto</small>
+                  </div>
+
+                  <div class="mb-4">
+                    <label>Anno*</label>
+                    {{form.year}}
+                    <small class="form-text text-gray">inserisci l'anno della tua auto</small>
+                  </div>
+
+                  <div class="mb-4">
+                    <label>Targa</label>
+                    {{form.plate}}
+                    <small class="form-text text-gray">inserisci la targa della tua auto</small>
+                  </div>
+
+                  <div class="mb-4">
+                    <label>Descrizione</label>
+                    {{form.description}}
+                    <small class="form-text text-gray">inserisci una descrizione della tua auto</small>
+                  </div>
+
+                  
+                </form>
+
+
+                  <div class="mb-4">
+                    <h5>Foto Veicolo</h5>
+                      <small><em>Carica le foto del veicolo <br> 
+                        devi caricare minimo 2 foto e massimo 5 foto</em><br>
+                      Almeno una foto del vano motore!</small>
+
+
+
+                      <div id="actions" class="row">
+                        <div class="" style="width: 100%">
+                          <div class="btn-group w-100">
+                            <span class="btn btn-success col fileinput-button">
+                              <i class="fas fa-plus"></i>
+                              <span>Aggiungi Foto</span>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class="table table-striped files" id="previews">
+                        <div id="template" class="row mt-2">
+                          <div class="col-auto">
+                              <span class="preview"><img src="data:," alt="" data-dz-thumbnail /></span>
+                          </div>
+                          <div class="col-auto d-flex align-items-center">
+                            <div class="btn-group">
+                              <button data-dz-remove class="btn btn-danger delete">
+                                <i class="fas fa-trash"></i>
+                                <span>Cancella</span>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <b><em>Successivamente attendi la verifica da parte dello staff</em></b>
+
+
+
+
+                  </div>
+
+
+                  <div class="" style="width: 100%">
+                    <div class="btn-group w-100">
+                      <button class="btn btn-primary" onclick=submitForm()>
+                        <i class="fas fa-save"></i>
+                        <span>Aggiungi veicolo</span>
+                      </button>
+                    </div>
+
+                </div>
+
+
+
+                <div class="modal fade" id="popup" tabindex="-1" role="dialog">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <strong class="modal-title">Errori</strong>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body" id="errors">
+                        <!-- Contenuto del popup -->
+                        Contenuto del popup
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                    <br>
+                    <br>
+                    <br>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+    </main>
+
+    {% endblock content %}
+
+
+    
+    {% block javascripts %}
+    <!-- jquery-validation -->
+    <script src="{% static 'plugins/jquery-validation/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'plugins/jquery-validation/additional-methods.min.js' %}"></script>
+    <!-- dropzonejs -->
+    <script src="{% static 'plugins/dropzone/min/dropzone.min.js' %}"></script>
+    
+    
+      <script>
+        // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
+        var previewNode = document.querySelector("#template")
+        previewNode.id = ""
+        var previewTemplate = previewNode.parentNode.innerHTML
+        previewNode.parentNode.removeChild(previewNode)
+        //
+        var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
+          url: "/target-url", // Set the url
+          thumbnailWidth: 80,
+          thumbnailHeight: 80,
+          parallelUploads: 20,
+          previewTemplate: previewTemplate,
+          autoQueue: false, // Make sure the files aren't queued until manually added
+          previewsContainer: "#previews", // Define the container to display the previews
+          clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
+        })
+      
+      </script>
+
+      <script>
+        function submitForm() {
+          const form = document.getElementById("CarForm");
+          const formData = new FormData(form);
+          const files = myDropzone.getAcceptedFiles();
+          //
+          if (!form.checkValidity()) {
+            form.reportValidity();  
+            return;
+          }
+          //
+          files.forEach(file => {
+            formData.append("photos", file);
+          })
+
+          // Invia il form al server
+          fetch(form.action, {
+              method: 'POST',
+              body: formData,
+              headers: {
+                  'X-CSRFToken': "{{ csrf_token }}"
+              }
+          })
+          .then(response => {
+            if (response.redirected) {
+              window.location.href = response.url;  // Reindirizza manualmente
+            } else {
+                response.json().then (data => {
+                  displayErrorOnHtml(data['form.errors']);
+                });
+            }
+        })
+        .catch(error => {
+            console.error("Errore durante l'invio del form:", error);
+            displayErrorOnHtml(error);
+          });
+      }
+      </script>
+
+
+
+      <script>
+        $(document).ready(function() {
+          {% if view_errors  %}
+            displayErrorOnHtml('{{view_errors|safe}}');
+          {% endif %}
+        })
+      </script>
+      
+      <script>
+        $(document).ready(function() {
+          $('.product-image-thumb').on('click', function () {
+            var $image_element = $(this).find('img');
+            $('.product-image').prop('src', $image_element.attr('src'))
+            $('.product-image-thumb.active').removeClass('active')
+            $(this).addClass('active')
+          })
+        })
+      </script>
+
+
+
+
+
+
+
+    
+    
+    
+    
+    {% endblock javascripts %}
+      

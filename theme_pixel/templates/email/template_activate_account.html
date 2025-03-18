@@ -1,0 +1,7 @@
+{% autoescape off %}
+Ciao {{ user.username }},
+
+Per favore clicca sul link qui sotto per confermare la tua registrazione:
+
+{{ protocol }}://{{ domain }}{% url 'verify_account' uidb64=uid token=token %}
+{% endautoescape %}

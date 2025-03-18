@@ -1,0 +1,104 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+    <main>
+
+        {% include 'includes/pre-loader.html' %}
+
+
+        <section class="section-header overflow-hidden pt-7 pt-lg-8 pb-9 pb-lg-12 bg-primary text-white">
+            <div class="container">
+              <div class="row">
+                <div class="col-12 text-center">
+                    <h1 class="display-2 mb-3">Impostazioni Account</h1>
+                    <p class="lead fw-normal text-muted mb-4 px-lg-10">
+                        Gestisti le Impostazioni del tuo profilo
+                    </p>
+                </div>
+              </div>
+            </div>
+            <figure class="position-absolute bottom-0 left-0 w-100 golfo-d-md-block mb-n2"><svg class="fill-white"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4">
+                <path d="M3000,0v185.4H0V0c496.4,115.6,996.4,173.4,1500,173.4S2503.6,115.6,3000,0z"></path>
+              </svg></figure>
+        </section>
+
+          <div class="section py-0 mt-5">
+            <div class="container mt-n10 mt-lg-n12 z-2">
+              <div class="row justify-content-center">
+                <div class="card border-0 p-2 p-md-3 p-lg-5">
+                  <h2>Informazioni Personali</h2>
+                  <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-4">
+                      <label for="nome">Nome*</label>
+                      <input type="text" class="form-control" id="nome" name="nome" value="{{ user.first_name }}" required>
+                    </div>
+                    <div class="mb-4">
+                      <label for="cognome">Cognome*</label>
+                      <input type="text" class="form-control" id="cognome" name="cognome" value="{{ user.last_name }}" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Salva Modifiche</button>
+                  </form>
+                  {% if messages %}
+                      <div class="mt-4">
+                        {% for message in messages %}
+                          {% if 'informazioni_personali' in message.extra_tags  %}
+                            <div class="alert alert-{{ message.level_tag }}">
+                              {{ message }}
+                            </div>
+                          {% endif %}
+                        {% endfor %}
+                      </div>
+                  {% endif %}
+                </div>
+              </div>
+
+              <div class="row justify-content-center">
+                <div class="card border-0 p-2 p-md-3 p-lg-5">
+                  <h2>Cambio Password</h2>
+                  <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-4">
+                      <label for="vecchia_password">Vecchia Password*</label>
+                      <input type="password" placeholder="" class="form-control" id="vecchia_password" name="old_password" required>
+                    </div>
+                    <div class="mb-4">
+                      <label for="nuova_password">Nuova Password*</label>
+                      <input type="password" class="form-control" id="nuova_password" name="new_password1" required>
+                    </div>
+                    <div class="mb-4">
+                      <label for="conferma_password">Conferma Password*</label>
+                      <input type="password" class="form-control" id="conferma_password" name="new_password2" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Cambia Password</button>
+                  </form>
+                  {% if messages %}
+                      <div class="mt-4">
+                        {% for message in messages %}
+                          {% if 'password' in message.extra_tags  %}
+                            <div class="alert alert-{{ message.level_tag }}">
+                              {{ message }}
+                            </div>
+                          {% endif %}
+                        {% endfor %}
+                      </div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+    </main>
+
+    {% endblock content %}
+
+
+    
+    {% block javascripts %}
+    
+    {% endblock javascripts %}
+      
+

@@ -1,0 +1,80 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+    <main>
+
+        {% include 'includes/pre-loader.html' %}
+
+
+        <section class="section-header overflow-hidden pt-7 pt-lg-8 pb-9 pb-lg-12 bg-primary text-white">
+            <div class="container">
+              <div class="row">
+                <div class="col-12 text-center">
+                    <h1 class="display-2 mb-3">Contattaci</h1>
+                    <p class="lead fw-normal text-muted mb-4 px-lg-10">
+                        Se desideri maggiori informazioni sui nostri eventi o vuoi unirti a noi come sponsor, non esitare a contattarci!
+                    </p>
+                </div>
+              </div>
+            </div>
+            <figure class="position-absolute bottom-0 left-0 w-100 golfo-d-md-block mb-n2"><svg class="fill-white"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4">
+                <path d="M3000,0v185.4H0V0c496.4,115.6,996.4,173.4,1500,173.4S2503.6,115.6,3000,0z"></path>
+              </svg></figure>
+          </section>
+          <div class="section py-0 mt-6">
+            <div class="container mt-n10 mt-lg-n12 z-2">
+              <div class="row justify-content-center">
+                <div class="card border-0 p-2 p-md-3 p-lg-5">
+                    <div class="card-body px-0 pt-0">
+                        <form method="post">
+                            {% csrf_token %}
+                            <!-- Form -->
+                            <div class="mb-4">
+                                <label for="name">Il tuo nome</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon3"><span class="fas fa-user-circle"></span></span>
+                                    <input type="text" class="form-control" placeholder="Mario Rossi" name="name" required>
+                                </div>
+                            </div>
+                            <!-- End of Form -->
+                            <!-- Form -->
+                            <div class="mb-4">
+                                <label for="email">La tua email</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon4"><span class="fas fa-envelope"></span></span>
+                                    <input type="email" class="form-control" placeholder="mario.rossi@gmail.com" name="email" required>
+                                </div>
+                            </div>
+                            <!-- End of Form -->
+                            <div class="mb-4">
+                                <label for="message">Il tuo messaggio</label>
+                                <textarea placeholder="Scrivici qualcosa..." class="form-control" name="message" rows="4" required></textarea>
+                            </div>
+                            <!-- End of Form -->
+                            <div class="d-grid">
+                                <button type="submit" class="btn rounded btn-secondary">Invia messaggio</button>
+                            </div>
+                        </form>
+                        {% if messages %}
+                        <div class="mt-4 mb-4">
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+    
+    
+    
+        </main>
+
+    {% endblock content %}

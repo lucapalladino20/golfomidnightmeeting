@@ -1,0 +1,57 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+    <main>
+
+        {% include 'includes/pre-loader.html' %}
+
+
+        <section class="section-header overflow-hidden pt-7 pt-lg-8 pb-9 pb-lg-12 bg-primary text-white">
+            <div class="container">
+              <div class="row">
+                <div class="col-12 text-center">
+                    <h1 class="display-2 mb-3">Il mio Garage</h1>
+                    <p class="lead fw-normal text-muted mb-4 px-lg-10">
+                        Inserisci le tue auto e gestisci il tuo garage.
+                    </p>
+                </div>
+              </div>
+            </div>
+            <figure class="position-absolute bottom-0 left-0 w-100 golfo-d-md-block mb-n2"><svg class="fill-white"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4">
+                <path d="M3000,0v185.4H0V0c496.4,115.6,996.4,173.4,1500,173.4S2503.6,115.6,3000,0z"></path>
+              </svg></figure>
+          </section>
+          <div class="section py-0 mt-5">
+            <div class="container mt-n10 mt-lg-n12 z-2">
+              <div class="row justify-content-center">
+                <div class="card border-0 p-2 p-md-3 p-lg-5">
+                    <a href="{% url 'my_garage/add_car' %}" class="btn btn-success text-white m-2" type="button" style="border-radius: 0.5rem;">Aggiungi un'auto</a>
+                    <div class="table-responsive-sm">
+                    <table class="table table-hover">
+                        <tr style="pointer-events: none;">
+                            <th scope="col" id="">Veicolo</th>
+                            <th scope="col" id="">Stato</th>
+                            <th scope="col" id=""></th>
+                        </tr>
+                        {% for car in cars %}
+                        <tr onclick="window.location.href='{% url 'my_garage/view_car' car.id %}'">
+                          <td>{{car.brand}} {{car.model}} {{car.year}}</td>
+                          <td>{{ car.get_state_display }}</td>
+                          <td><a style="color: red;" href="{% url 'my_garage/del_car' car.id %}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+              </div>
+            </div>
+          </div>
+
+    </main>
+
+    {% endblock content %}

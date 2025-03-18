@@ -1,0 +1,122 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<main>
+
+  {% include 'includes/pre-loader.html' %}
+
+  <!-- Hero -->
+  <section class="section-header overflow-hidden pt-7 pt-lg-8 pb-9 pb-lg-12 bg-primary text-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+
+          <style>
+            .golfo-big-icon {
+              opacity: .11;
+              width: 100vw; /* larghezza pari alla larghezza della viewport */
+              height: auto; /* altezza pari all'altezza della viewport */
+              object-fit: cover; /* ridimensiona l'immagine per coprire il contenitore */
+              display: block !important;
+            }
+            
+            @media (min-width: 800px) {
+              .golfo-big-icon {
+                width: 100vw;
+                height: auto;
+                object-fit: cover;
+              }
+            }
+            
+            @media (max-width: 800px) and (min-width: 400px) {
+              .golfo-big-icon {
+                width: 180%;
+                height: auto;
+                object-fit: cover;
+              }
+            }
+            
+            @media (max-width: 400px) {
+              .golfo-big-icon {
+                width: 200%;
+                height: auto;
+                object-fit: cover;
+              }
+            }
+            }
+              </style>
+
+          <div class="golfo-big-icon d-none d-lg-block position-absolute top-50 start-50 translate-middle">
+  <img class="navbar-brand-dark" src="{% static 'assets/img/sfondo_home.png' %}" alt="Logo light">
+</div>
+
+          <div class="golfo-center-container">
+            <div class="golfo-flex-container">
+              <p class="golfo-title">Golfo_midnight</p>
+              <p class="golfo-title">meeting</p>
+            </div>
+          </div>
+          
+          <h2 class="lead fw-normal text-muted mb-4 px-lg-10">
+            Eventi automobilistici su selezione nel golfo di Gaeta 
+          </h2>
+          <!-- Button Modal -->
+
+          <div class="d-flex justify-content-center align-items-center mb-5">
+            <a href="https://www.instagram.com/golfomidnlght_meeting/" target="_blank"  class="btn btn-tertiary mb-3 mt-2 me-2 me-md-3 animate-up-2">
+              <span class="fab fa-instagram me-2"></span> 
+              <span class="d-md-inline">Seguici su Instagram</span> 
+          </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <figure class="position-absolute bottom-0 left-0 w-100 golfo-d-md-block mb-n2"><svg class="fill-white"
+        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4">
+        <path d="M3000,0v185.4H0V0c496.4,115.6,996.4,173.4,1500,173.4S2503.6,115.6,3000,0z"></path>
+      </svg></figure>
+  </section>
+
+  
+  <section class="section section-lg">
+    <div class="container">
+      <div class="row justify-content-between align-items-center mb-5 mb-lg-7">
+        <div class="col-12 col-lg-5 mb-5 mb-lg-0 order-lg-2">
+          <h2 class="h1">Eventi</h2>
+          <p class="mb-4 lead fw-bold">Accendi l’emozione! 🚀</p>
+          <p class="mb-4">Scopri tutti gli eventi e preparati a vivere momenti indimenticabili con noi.</p>
+          <a href="{% url 'events' %}" target=""
+            class="btn btn-outline-primary"><span class="fas fa-book me-2"></span>Scopri i prossimi eventi</a>
+        </div>
+        <div class="col-12 col-lg-6 order-lg-1">
+          <img src="{% static 'assets/img/car_meet.jpg' %}">
+        </div>
+      </div>
+        <div class="row justify-content-between align-items-center mb-5 mb-lg-7">
+          <div class="col-lg-5 mb-5 mb-lg-0">
+            <h2 class="h1 d-flex align-items-center">Registrazione Auto </h2>
+            <p class="mb-4 lead fw-bold">Registrati per il prossimo evento!</p>
+            <p class="mb-4">Hai un'auto che vuoi mostrare? Registrati per partecipare e attendi la selezione del nostro staff. Prepara la tua auto per il prossimo evento!</p>
+            
+
+            <!--<a href="{% if request.user.is_authenticated %} {% url 'my_garage' %} {% else %} {% url 'register' %} {% endif %}" -->
+            <a href="{% url 'my_garage' %}" 
+            class="btn btn-primary mt-2 animate-up-2">
+
+              <span class="fas fa-car me-2"></span>
+              Registrati ora
+            </a>
+          </div>
+        <div class="col-lg-6">
+          <img src="{% static 'assets/img/car_registration.png' %}">
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+</main>
+
+{% endblock content %}
