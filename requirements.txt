@@ -1,14 +1,15 @@
-# Core
-django==4.2.9
-python-dotenv==1.0.1
-str2bool==1.1
-
-# UI
-django-theme-pixel==1.0.7
-
-# Deployment
-whitenoise==6.6.0
+asgiref==3.8.1
+colorama==0.4.6
+Django==4.2.9
+django-colorfield==0.7.2
 gunicorn==21.2.0
-
-# psycopg2-binary
-# mysqlclient
+packaging==24.2
+pillow==11.1.0
+python-dotenv==1.0.1
+qrcode==8.0
+six==1.17.0
+sqlparse==0.5.3
+str2bool==1.1
+typing_extensions==4.12.2
+tzdata==2025.1
+whitenoise==6.6.0
