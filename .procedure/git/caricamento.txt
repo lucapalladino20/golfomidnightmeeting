@@ -11,3 +11,4 @@ git remote add origin https://github.com/lucapalladino20/golfomidnightmeeting.gi
 
 # Caricare il progetto su GitHub
 git push -u origin master
+git push --force origin master

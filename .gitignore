@@ -1,0 +1,6 @@
+.backup/
+.procedure/
+.scripts/
+.venv/
+.events_photo/
+.photos/
